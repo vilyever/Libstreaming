@@ -2,7 +2,6 @@ package net.majorkernelpanic.streaming.rtsp;
 
 import android.support.annotation.NonNull;
 
-import com.vilyever.logger.Logger;
 import com.vilyever.socketclient.helper.SocketConfigure;
 import com.vilyever.socketclient.helper.SocketResponsePacket;
 import com.vilyever.socketclient.server.SocketServerClient;
@@ -80,7 +79,6 @@ public class RtspSocketServerClient extends SocketServerClient {
         }
         else {
             @RtspRequestMethodType.Int int methodType = RtspRequestMethodType.methodToType(request.getMethod());
-            Logger.log("method " + RtspRequestMethodType.name(RtspRequestMethodType.values[methodType]));
             if (methodType == RtspRequestMethodType.OPTIONS) {
                 response.setStatus(RtspResponseStatus.OK);
                 String methods = "";
@@ -101,9 +99,7 @@ public class RtspSocketServerClient extends SocketServerClient {
                         switch (methodType) {
                             case RtspRequestMethodType.DESCRIBE: {
                                 internalUpdateSession(request.getUri());
-                                Logger.log("syncConfigure B");
                                 getSession().syncConfigure();
-                                Logger.log("syncConfigure A");
 
                                 String requestContent = getSession().getSessionDescription();
                                 String requestAttributes =

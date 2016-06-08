@@ -408,13 +408,10 @@ public class Session {
             IOException {
 
         for (int id = 0; id < 2; id++) {
-            Logger.log("id " + id);
             Stream stream = id == 0 ? mAudioStream : mVideoStream;
             if (stream != null && !stream.isStreaming()) {
                 try {
-                    Logger.log("stream.configure B");
                     stream.configure();
-                    Logger.log("stream.configure A");
                 }
                 catch (CameraInUseException e) {
                     postError(ERROR_CAMERA_ALREADY_IN_USE, id, e);
@@ -442,9 +439,7 @@ public class Session {
                 }
             }
         }
-        Logger.log("postSessionConfigured");
         postSessionConfigured();
-        Logger.log("postSessionConfigured2");
     }
 
     /**

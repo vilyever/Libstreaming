@@ -2,9 +2,7 @@ package net.majorkernelpanic.streaming.rtsp;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.vilyever.contextholder.ContextHolder;
 import com.vilyever.socketclient.SocketClient;
 import com.vilyever.socketclient.helper.SocketResponsePacket;
 import com.vilyever.socketclient.server.SocketServer;
@@ -45,7 +43,6 @@ public class RtspSocketServer extends SocketServer {
     public int beginListen() {
         int port = beginListenFromPort(DefaultPort);
         Log.i(TAG, "RTSP server begin listen on port " + port);
-        Toast.makeText(ContextHolder.getContext(), "RTSP server begin listen on port " + port, Toast.LENGTH_LONG).show();
         getSession();
         return port;
     }
