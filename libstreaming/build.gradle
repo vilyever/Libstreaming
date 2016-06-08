@@ -25,6 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
 
     compile 'com.github.vilyever:AndroidLogger:1.0.7'
-    compile 'com.github.vilyever:AndroidSocketClient:1.5.1'
+    compile 'com.github.vilyever:AndroidSocketClient:2.0.3'
     compile 'com.github.vilyever:AndroidFileReadWrite:1.1.0'
 }

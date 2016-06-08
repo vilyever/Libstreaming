@@ -5,7 +5,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.vilyever.contextholder.ContextHolder;
-import com.vilyever.logger.Logger;
 import com.vilyever.socketclient.SocketClient;
 import com.vilyever.socketclient.helper.SocketResponsePacket;
 import com.vilyever.socketclient.server.SocketServer;
@@ -36,7 +35,7 @@ public class RtspSocketServer extends SocketServer {
     public synchronized static RtspSocketServer getInstance() {
         if (instance == null) {
             instance = new RtspSocketServer();
-            instance.getSocketPacketHelper().setReceiveTailString("\r\n\r\n");
+            instance.getSocketPacketHelper().setReceiveTrailerString("\r\n\r\n");
         }
 
         return instance;
@@ -62,17 +61,11 @@ public class RtspSocketServer extends SocketServer {
     }
 
     public void syncStartStreaming(int trackID) throws IOException {
-        Logger.log("syncStartStreaming 1");
         boolean streaming = isStreaming();
-        Logger.log("syncStartStreaming 2");
         getSession().syncStart(trackID);
-        Logger.log("syncStartStreaming 3");
         if (!streaming && RtspSocketServer.getInstance().isStreaming()) {
-        Logger.log("syncStartStreaming 4");
             internalNotifyStreamingStart();
-        Logger.log("syncStartStreaming 5");
         }
-        Logger.log("syncStartStreaming 6");
     }
 
     public void syncStopStreaming() {
@@ -180,7 +173,7 @@ public class RtspSocketServer extends SocketServer {
     /* Overrides */
     @Override
     protected SocketServerClient internalGetSocketServerClient(Socket socket) {
-        RtspSocketServerClient client = new RtspSocketServerClient(socket);
+        RtspSocketServerClient client = new RtspSocketServerClient(socket, getSocketConfigure());
         client.setSessionDelegate(new RtspSocketServerClient.SessionDelegate() {
             @Override
             public void onError(RtspSocketServerClient client) {

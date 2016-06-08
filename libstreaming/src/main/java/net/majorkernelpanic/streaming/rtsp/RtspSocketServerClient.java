@@ -3,6 +3,7 @@ package net.majorkernelpanic.streaming.rtsp;
 import android.support.annotation.NonNull;
 
 import com.vilyever.logger.Logger;
+import com.vilyever.socketclient.helper.SocketConfigure;
 import com.vilyever.socketclient.helper.SocketResponsePacket;
 import com.vilyever.socketclient.server.SocketServerClient;
 
@@ -24,8 +25,8 @@ public class RtspSocketServerClient extends SocketServerClient {
 
 
     /* Constructors */
-    public RtspSocketServerClient(@NonNull Socket socket) {
-        super(socket);
+    public RtspSocketServerClient(@NonNull Socket socket, SocketConfigure configure) {
+        super(socket, configure);
     }
 
     /* Public Methods */
